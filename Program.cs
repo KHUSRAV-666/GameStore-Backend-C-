@@ -1,6 +1,5 @@
 using GameStore.Api.Data;
 using GameStore.Api.Endpoints;
-using GameStore.Api.Modes;
 
 var builder = WebApplication.CreateBuilder(args);
 

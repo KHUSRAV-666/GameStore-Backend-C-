@@ -1,4 +1,4 @@
-using GameStore.Api.Modes;
+using GameStore.Api.Models;
 
 namespace GameStore.Api.Models
 {
