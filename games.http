@@ -19,8 +19,8 @@ Content-Type: application/json
 
 {
     "name": "Street fIghter 99",
-    "genre": "Fighting",
-    "price": 141.99,
+    "genre": "",
+    "price": 948.99,
     "releaseDate": "1992-07-15"
 }
 
