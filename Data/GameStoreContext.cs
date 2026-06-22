@@ -1,5 +1,4 @@
 using GameStore.Api.Models;
-using GameStore.Api.Modes;
 using Microsoft.EntityFrameworkCore;
 
 namespace GameStore.Api.Data

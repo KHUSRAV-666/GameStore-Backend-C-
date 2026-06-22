@@ -30,10 +30,10 @@ namespace GameStore.Api.Data.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<DateOnly>("ReleaseDate")
+                    b.Property<decimal>("Price")
                         .HasColumnType("TEXT");
 
-                    b.Property<decimal>("price")
+                    b.Property<DateOnly>("ReleaseDate")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -43,7 +43,7 @@ namespace GameStore.Api.Data.Migrations
                     b.ToTable("Games");
                 });
 
-            modelBuilder.Entity("GameStore.Api.Modes.Genre", b =>
+            modelBuilder.Entity("GameStore.Api.Models.Genre", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -60,7 +60,7 @@ namespace GameStore.Api.Data.Migrations
 
             modelBuilder.Entity("GameStore.Api.Models.Game", b =>
                 {
-                    b.HasOne("GameStore.Api.Modes.Genre", "Gemre")
+                    b.HasOne("GameStore.Api.Models.Genre", "Gemre")
                         .WithMany()
                         .HasForeignKey("GenreId")
                         .OnDelete(DeleteBehavior.Cascade)
