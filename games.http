@@ -1,21 +1,28 @@
+@GameStore_HostAddress = http://localhost:5180
+
+// TOKEN =============================================
+GET {{GameStore_HostAddress}}/weatherforecast/
+Accept: application/json
+
 // GAMES =============================================
-GET http://localhost:5180/games
+###
+GET {{GameStore_HostAddress}}/games
 
 ###
-GET http://localhost:5180/games/3
+GET {{GameStore_HostAddress}}/games/3
 
 ###
-POST http://localhost:5180/games
+POST {{GameStore_HostAddress}}/games
 Content-Type: application/json
 
 {
-    "name": "TEST GAME",
-    "genreId": 3,
-    "price": 59.99,
-    "releaseDate": "2023-10-20"
+    "name": "TEST GAME 2",
+    "genreId": 2,
+    "price": 49.99,
+    "releaseDate": "2024-11-23"
 }
 ###
-PUT http://localhost:5180/games/1
+PUT {{GameStore_HostAddress}}/games/1
 Content-Type: application/json
 
 {
@@ -26,8 +33,19 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:5180/games/3
+DELETE {{GameStore_HostAddress}}/games/3
 
 // GENRES ==========================================
 ###
-GET http://localhost:5180/genres
+GET {{GameStore_HostAddress}}/genres
+
+// USERS ===========================================
+###
+POST {{GameStore_HostAddress}}/api/register
+Content-Type: application/json
+
+{
+    "email": "qwe@qw.com",
+    "password": "zxcvb89"
+}
+

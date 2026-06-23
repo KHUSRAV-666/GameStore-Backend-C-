@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GameStore.Api.Data.Migrations
 {
     [DbContext(typeof(GameStoreContext))]
-    [Migration("20260622052130_InitialCreate")]
+    [Migration("20260623113255_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -61,15 +61,38 @@ namespace GameStore.Api.Data.Migrations
                     b.ToTable("Genres");
                 });
 
+            modelBuilder.Entity("JwtAuthDotNet.Entities.User", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
+                });
+
             modelBuilder.Entity("GameStore.Api.Models.Game", b =>
                 {
-                    b.HasOne("GameStore.Api.Models.Genre", "Gemre")
+                    b.HasOne("GameStore.Api.Models.Genre", "Genre")
                         .WithMany()
                         .HasForeignKey("GenreId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Gemre");
+                    b.Navigation("Genre");
                 });
 #pragma warning restore 612, 618
         }
