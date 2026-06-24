@@ -5,6 +5,7 @@ using System.Text;
 using GameStore.Api.Data;
 using GameStore.Api.Entities;
 using GameStore.Api.Models;
+using GameStore.Api.Models.Auth;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -16,9 +17,9 @@ namespace GameStore.Api.Services
         IConfiguration configuration
     ) : IAuthService
     {
-        public async Task<TokenResponseDto?> LoginAsync(UserDto request)
+        public async Task<TokenResponseDto?> LoginAsync(LoginModel request)
         {
-            var user = await context.Users.FirstOrDefaultAsync(u => u.Username == request.UserName);
+            var user = await context.Users.FirstOrDefaultAsync(u => u.Username == request.Username);
             if (user is null) return null;
             if (new PasswordHasher<User>().VerifyHashedPassword(user, user.PasswordHash, request.Password) == PasswordVerificationResult.Failed)
             {
@@ -38,9 +39,9 @@ namespace GameStore.Api.Services
             };
         }
 
-        public async Task<User?> RegisterAsync(UserDto request)
+        public async Task<User?> RegisterAsync(RegisterModel request)
         {
-            if (await context.Users.AnyAsync(u => u.Username == request.UserName))
+            if (await context.Users.AnyAsync(u => u.Username == request.Username))
             {
                 return null;
             }
@@ -48,7 +49,7 @@ namespace GameStore.Api.Services
             var user = new User();
             var hashedPassword = new PasswordHasher<User>().HashPassword(user, request.Password);
 
-            user.Username = request.UserName;
+            user.Username = request.Username;
             user.PasswordHash = hashedPassword;
             user.Role = request.Role;
 
@@ -105,7 +106,7 @@ namespace GameStore.Api.Services
             };
 
             var key = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(configuration.GetValue<string>("AppSettings:Token")!));
+                Encoding.UTF8.GetBytes(configuration.GetValue<string>("AppSettings:Secret")!));
 
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512);
 

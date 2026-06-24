@@ -12,5 +12,6 @@ namespace GameStore.Api.Data
         // games
         public DbSet<Game> Games => Set<Game>();
         public DbSet<Genre> Genres => Set<Genre>();
+        public DbSet<Product> Products => Set<Product>(); // { get; set; }
     }
 }

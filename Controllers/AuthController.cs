@@ -3,6 +3,7 @@ using GameStore.Api.Entities;
 using Microsoft.AspNetCore.Mvc;
 using GameStore.Api.Services;
 using Microsoft.AspNetCore.Authorization;
+using GameStore.Api.Models.Auth;
 
 namespace GameStore.Api.Controllers
 {
@@ -13,7 +14,7 @@ namespace GameStore.Api.Controllers
         public static User user = new();
 
         [HttpPost("register")]
-        public async Task<ActionResult<User>> Register(UserDto request)
+        public async Task<ActionResult<User>> Register(RegisterModel request)
         {
             var user = await authService.RegisterAsync(request);
             if (user is null) return BadRequest("Username already exist.");
@@ -23,7 +24,7 @@ namespace GameStore.Api.Controllers
 
 
         [HttpPost("login")]
-        public async Task<ActionResult<TokenResponseDto>> Login(UserDto request)
+        public async Task<ActionResult<TokenResponseDto>> Login(LoginModel request)
         {
             var res = await authService.LoginAsync(request);
             if (res is null) return BadRequest("Invalid username or password");

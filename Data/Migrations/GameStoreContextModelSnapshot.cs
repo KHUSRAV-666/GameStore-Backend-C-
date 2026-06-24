@@ -87,6 +87,21 @@ namespace GameStore.Api.Data.Migrations
                     b.ToTable("Genres");
                 });
 
+            modelBuilder.Entity("GameStore.Api.Models.Product", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Products");
+                });
+
             modelBuilder.Entity("GameStore.Api.Models.Game", b =>
                 {
                     b.HasOne("GameStore.Api.Models.Genre", "Genre")
