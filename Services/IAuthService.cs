@@ -1,11 +1,12 @@
-using JwtAuthDotNet.Entities;
-using JwtAuthDotNet.Models;
+using GameStore.Api.Entities;
+using GameStore.Api.Models;
 
 namespace GameStore.Api.Services
 {
     public interface IAuthService
     {
         Task<User?> RegisterAsync(UserDto request);
-        Task<string?> LoginAsync(UserDto request);
+        Task<TokenResponseDto?> LoginAsync(UserDto request);
+        Task<TokenResponseDto?> RefreshTokenAsync(RefreshTokenRequestDto request);
     }
 }

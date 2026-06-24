@@ -1,15 +1,10 @@
-﻿using JwtAuthDotNet.Models;
-using JwtAuthDotNet.Entities;
-using Microsoft.AspNetCore.Identity;
+﻿using GameStore.Api.Models;
+using GameStore.Api.Entities;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using System.IdentityModel.Tokens.Jwt;
 using GameStore.Api.Services;
 using Microsoft.AspNetCore.Authorization;
 
-namespace JwtAuthDotNet.Controllers
+namespace GameStore.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -28,11 +23,20 @@ namespace JwtAuthDotNet.Controllers
 
 
         [HttpPost("login")]
-        public async Task<ActionResult<string>> Login(UserDto request)
+        public async Task<ActionResult<TokenResponseDto>> Login(UserDto request)
         {
-            var token = await authService.LoginAsync(request);
-            if (token is null) return BadRequest("Invalid username or password");
-            return Ok(token);
+            var res = await authService.LoginAsync(request);
+            if (res is null) return BadRequest("Invalid username or password");
+            return Ok(res);
+        }
+
+        [HttpPost("refresh-token")]
+        public async Task<ActionResult<TokenResponseDto>> RefreshToken(RefreshTokenRequestDto request)
+        {
+            var result = await authService.RefreshTokenAsync(request);
+            if (result is null || result.AccessToken is null || result.RefreshToken is null) return Unauthorized("Invalid refresh token");
+
+            return Ok(result);
         }
 
         [Authorize]

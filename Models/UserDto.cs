@@ -1,4 +1,4 @@
-﻿namespace JwtAuthDotNet.Models
+﻿namespace GameStore.Api.Models
 {
     public class UserDto
     {

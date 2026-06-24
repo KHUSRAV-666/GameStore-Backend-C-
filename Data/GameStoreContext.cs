@@ -1,5 +1,5 @@
 using GameStore.Api.Models;
-using JwtAuthDotNet.Entities;
+using GameStore.Api.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace GameStore.Api.Data
