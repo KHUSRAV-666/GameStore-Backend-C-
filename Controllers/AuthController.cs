@@ -53,5 +53,25 @@ namespace GameStore.Api.Controllers
         {
             return Ok("You are an ADMIN!");
         }
+
+        // FROM MEDIUM ----------------------------
+        [HttpGet("ConfirmEmail")]
+        public async Task<IActionResult> ConfirmEmail(
+        string token,
+        string email
+        )
+        {
+            return Ok("");
+            // ... email confirmation logic ... 
+        }
+
+
+        [HttpPost("ForgotPassword")]
+        public async Task<IActionResult> ForgotPassword(
+        [FromBody] ForgotPasswordModel model) => Ok("");// ... forgot password logic ... 
+
+        [HttpPost("ResetPassword")]
+        public async Task<IActionResult> ResetPassword(
+        [FromBody] ResetPasswordModel model) => Ok("");// ... reset password logic ... 
     }
 }

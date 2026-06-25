@@ -6,15 +6,10 @@ namespace GameStore.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class ProductsController : ControllerBase
+    public class ProductsController(IProductService productService) : ControllerBase
     {
-        private readonly IProductService _productService;
+        private readonly IProductService _productService = productService;
 
-        // Constructor injection
-        public ProductsController(IProductService productService)
-        {
-            _productService = productService;
-        }
         // Temporary in-memory list of products
         private static readonly List<Product> Products =
             new() { new Product { Id = Guid.NewGuid(), Name = "Laptop" },

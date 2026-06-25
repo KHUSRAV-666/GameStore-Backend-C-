@@ -1,6 +1,7 @@
 using System.Text;
 using GameStore.Api.Data;
 using GameStore.Api.Endpoints;
+using GameStore.Api.Middlewares;
 using GameStore.Api.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -36,6 +37,7 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
     app.MapScalarApiReference();
+    app.UseMiddleware<ExceptionHandlingMiddleware>();
 }
 
 // token
@@ -46,5 +48,6 @@ app.MapControllers();
 // games
 app.MapGamesEndpoints();
 app.MapGenresEndpoints();
+
 app.MigrateDb();
 app.Run();
